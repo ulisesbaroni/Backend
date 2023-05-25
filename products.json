@@ -1,0 +1,122 @@
+[
+	{
+		"title": "Hibisco",
+		"description": "Biomasa de Frutas, Resinas naturales, Esencia concentrada de Hibisco, Aglutinante natural, Carbón vegetal, Sal.",
+		"thumbnail": [
+			"https://sagradamadre.com/imgcatprod/patagonia/Hibiscus.jpg"
+		],
+		"code": "HISBICO",
+		"price": 500.00,
+		"status": true,
+		"category": "Patagonia",
+		"id": 1
+	},
+	{
+		"title": "Rosa Mosqueta",
+		"description": "Biomasa de Frutas, Resinas naturales, Esencia concentrada de Rosa Mosqueta, Aglutinante natural, Carbón vegetal, Sal.",
+		"thumbnail": [
+			"https://sagradamadre.com/imgcatprod/patagonia/RosaMosqueta.jpg"
+		],
+		"code": "MOSQUETA",
+		"price": 500.00,
+		"status": true,
+		"category": "Patagonia",
+		"id": 2
+	},
+	{
+		"title": "Yerba Mate y Menta",
+		"description": "Biomasa de Frutas, Resinas naturales, Esencia concentrada de Yerba mate y menta, Aglutinante natural, Carbón vegetal, Sal.",
+		"thumbnail": [
+			"https://sagradamadre.com/imgcatprod/patagonia/YerbaMateMenta.jpg"
+		],
+		"code": "MATEYMENTA",
+		"price": 500.00,
+		"status": true,
+		"category": "Patagonia",
+		"id": 3
+	},
+	{
+		"title": "Vainilla Algarroba",
+		"description": "Biomasa de Frutas, Resinas naturales, Esencia concentrada de Algarroba y Vanilla, Aglutinante natural, Carbón vegetal, Sal.",
+		"thumbnail": [
+			"https://sagradamadre.com/imgcatprod/patagonia/VainillaAlgarroba.jpg"
+		],
+		"code": "VAINILLA",
+		"price": 500.00,
+		"status": true,
+		"category": "Patagonia",
+		"id": 4
+	},
+	{
+		"title": "Lavanda Silvestre",
+		"description": "Biomasa de Frutas, Resinas naturales, Esencia concentrada de Lavanda Silvestre, Aglutinante natural, Carbón vegetal, Sal",
+		"thumbnail": [
+			"https://sagradamadre.com/imgcatprod/patagonia/LavandaSilvestre.jpg"
+		],
+		"code": "LAVANDA",
+		"price": 500.00,
+		"status": true,
+		"category": "Patagonia",
+		"id": 5
+	},
+	{
+		"title": "Limón",
+		"description": "Biomasa de Frutas, Resinas naturales, Esencia concentrada de Limón, Aglutinante natural, Carbón vegetal, Sal.",
+		"thumbnail": [
+			"https://sagradamadre.com/imgcatprod/patagonia/Limon.jpg"
+		],
+		"code": "LIMON",
+		"price": 500.00,
+		"status": true,
+		"category": "Patagonia",
+		"id": 6
+	},
+	{
+		"title": "Yagra- Vainilla - Rosa",
+		"description": "Pétalos de rosa, aceite concentrado aromático, yagra, biomasa de fruta, carbón vegetal y sal",
+		"thumbnail": [
+			"https://sagradamadre.com/imgcatprod/lineaYagra/rosa-vainilla.jpg"
+		],
+		"code": "YAGRAVYR",
+		"price": 600.00,
+		"status": true,
+		"category": "Yagra",
+		"id": 7
+	},
+	{
+		"title": "Yagra- Violetas - Lavanda",
+		"description": "Flores de lavanda, aceite concentrado aromático, yagra, biomasa de fruta, carbón vegetal y sal.",
+		"thumbnail": [
+			"https://sagradamadre.com/imgcatprod/lineaYagra/violetas-lavanda.jpg"
+		],
+		"code": "YAGRAVYL",
+		"price": 600.00,
+		"status": true,
+		"category": "Yagra",
+		"id": 8
+	},
+	{
+		"title": "Yagra- Orquídea - Laurel",
+		"description": "Hojas de laurel, aceite concentrado aromático, yagra, biomasa de fruta, carbón vegetal y sal.",
+		"thumbnail": [
+			"https://sagradamadre.com/imgcatprod/lineaYagra/orquideas-laurel.jpg"
+		],
+		"code": "YAGRAOYL",
+		"price": 600.00,
+		"status": "true",
+		"category": "Yagra",
+		"id": 9
+	},
+	{
+		"title": "Yagra- Manzanilla - Olíbano",
+		"description": " Flores de manzanilla, aceite concentrado aromático, yagra, biomasa de fruta, carbón vegetal y sal.",
+		"thumbnail": [
+			"https://sagradamadre.com/imgcatprod/lineaYagra/manzanilla-olibano.jpg"
+		],
+		"code": "YAGRAMYO",
+		"price": 600.00,
+		"status": "true",
+		"category": "Yagra",
+		"id": 10
+	}
+]

@@ -1,0 +1,16 @@
+<h1>Alma inciensos</h1>
+<div id="product-container">
+  {{#each products}}
+    <div>
+      <div class="cardContainer">
+        <h2 class="cardTitle" >{{title}}</h2>
+        <p class="category">{{category}}</p>
+        <div class="imgConteiner">
+          <img src="{{thumbnail}}" alt="{{title}}" />
+        </div>
+        <p class="description">{{description}}</p>
+        <p class="price">$ {{price}}</p>
+      </div>
+    </div>
+  {{/each}}
+</div>
