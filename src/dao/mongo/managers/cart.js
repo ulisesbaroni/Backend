@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import cartsModel from "../models/carts.js";
 import productModel from "../models/products.js";
 
@@ -6,63 +7,101 @@ export default class CartsManager {
     return cartsModel.find(params).lean();
   };
 
-  getCartById = (cid) => {
-    return cartsModel.findById(cid);
+  getCartById = (param) => {
+    return cartsModel.findById(param);
   };
 
-  createCart = (product) => {
-    return cartsModel.create(product);
+  createCart = (cart) => {
+    return cartsModel.create(cart);
   };
 
-  deleteCart = (cid) => {
-    return cartsModel.findByIdAndDelete(cid);
+  addProductToCart = async (cid, pid) => {
+    try {
+      // Obtén el carrito correspondiente al ID (cid)
+      let cart = await cartsModel.findById(cid);
+      if (!cart) {
+        throw new Error("Carrito no encontrado");
+      }
+      // Busca el índice del producto en el arreglo de productos
+      const existingProductIndex = cart.products.findIndex(
+        (product) => product.product == pid
+      );
+      if (existingProductIndex !== -1) {
+        // Si el producto ya existe en el carrito, incrementa la cantidad en 1
+        cart.products[existingProductIndex].quantity += 1;
+      } else {
+        // Si el producto no existe en el carrito, agrégalo al arreglo de productos
+        cart.products.push({ product: pid, quantity: 1 });
+      }
+      // Guarda los cambios en la base de datos
+      cart = await cart.save();
+      return cart;
+    } catch (error) {
+      throw new Error(error.message);
+    }
   };
 
-  addProductToCart = (cid, pid) => {
-    //Verifico si existe el carrito
-    const cart = cartsModel.findById(cid);
-    if (!cart) {
-      console.log("ese carrito no existe");
+  deleteProductToCart = async (cid, pid) => {
+    try {
+      let cart = await cartsModel.findById(cid);
+      if (!cart) {
+        throw new Error("Carrito no encontrado");
+      }
+      console.log(cart.products);
+      const existingProductIndex = cart.products.findIndex(
+        (product) => product.product == pid
+      );
+      if (existingProductIndex !== -1) {
+        // Elimina el producto del arreglo de productos del carrito
+        cart.products.splice(existingProductIndex, 1);
+      } else {
+        // Si el producto no existe en el carrito, avisame
+        throw new Error("producto no encontrado");
+      }
+      cart = await cart.save();
+    } catch (error) {
+      throw new Error(error.message);
     }
-    //Si esta el producto sumo uno al quantity
-    const productIsInCart = cart.products.find(
-      (product) => product.product.toString() === pid
-    );
-    if (productIsInCart) {
-      productIsInCart.quantity += 1;
-    } else {
-      cart.products.push({ product: pid });
+  };
+  deleteCart = async (cid) => {
+    try {
+      const deletedCart = await cartsModel.findByIdAndDelete(cid);
+
+      if (!deletedCart) {
+        throw new Error("Carrito no encontrado");
+      }
+
+      return deletedCart;
+    } catch (error) {
+      throw new Error(error.message);
     }
-
-    //actualizo el total amount del carrito
-    const product = productModel.findById(pid);
-    cart.totalAmount += product.price;
-
-    //Guardar todo esto en el carrito con save
-    cart.save();
-    return cart;
   };
 
-  deleteProductToCart = (cid, pid) => {
-    const cart = cartsModel.findById(cid);
-    if (!cart) {
-      console.log("carrito no encontrado");
-    }
+  updateProductInCart = async (cid, pid, newQuantity) => {
+    try {
+      const cartToUpdate = await cartsModel.findById(cid);
+      if (!cartToUpdate) {
+        throw new Error("Carrito no encontrado");
+      }
+      const existingProductIndex = cartToUpdate.products.findIndex(
+        (product) => product.product == pid
+      );
+      if (existingProductIndex === -1) {
+        throw new Error("Producto no encontrado en el carrito");
+      }
+      console.log(cartToUpdate.products[existingProductIndex]);
 
-    const productIndex = cart.products.findIndex((p) => {
-      p.product.toString() === pid;
-    });
-    if (productIndex === -1) {
-      console.log("Este Producto no esta en el carrito");
-    }
-    //Restar el precio al totalAmount:
+      const product = cartToUpdate.products[existingProductIndex].product;
 
-    const product = productModel.findById(pid);
-    cart.totalAmount -= product.price * cart.products[productIndex].quantity;
-    //borro el profucto del carrito:
-    cart.products.splice(productIndex, 1);
-    //guardo los cambios del carrito:
-    cart.save();
-    return cart;
+      cartToUpdate.products[existingProductIndex] = {
+        product: product,
+        quantity: newQuantity.quantity,
+      };
+
+      const updatedCart = await cartToUpdate.save();
+      return updatedCart;
+    } catch (error) {
+      console.log(error);
+    }
   };
 }

@@ -1,0 +1,50 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+  }
+  .chatWindow {
+    width: 100vw;
+    height: 100vh;
+    background-color: white;
+  }
+  .title {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #634133;
+    padding-top: 30px;
+  }
+  .messages {
+    color: white;
+    margin-left: 30px;
+    padding-top: 30px;
+  }
+  .messages p {
+    line-height: 20px;
+  }
+  .inputContainer {
+    display: flex;
+    width: 100vw;
+    position: absolute;
+    bottom: 30px;
+    justify-content: center;
+  }
+  .chatInput input {
+    width: 80vw;
+    height: 30px;
+    border-radius: 40px;
+    text-indent: 30px;
+    border: 2px solid #634133;
+  }
+  .botonEnviar button {
+    background-color: transparent;
+    border: 2px solid #634133;
+    width: 100px;
+    height: 30px;
+    border-radius: 40px;
+    color: #634133;
+    margin-left: 30px;
+  }

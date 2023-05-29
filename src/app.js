@@ -8,6 +8,7 @@ import { Server } from "socket.io";
 import ProductsManager from "./dao/mongo/managers/productManager.js";
 import mongoose from "mongoose";
 import messagesModel from "./dao/mongo/models/messages.js";
+import productModel from "./dao/mongo/models/products.js";
 
 const app = express();
 

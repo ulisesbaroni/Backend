@@ -1,6 +1,7 @@
 import { Router } from "express";
 import ProductsManager from "../dao/mongo/managers/productManager.js";
 import CartsManager from "../dao/mongo/managers/cart.js";
+import productModel from "../dao/mongo/models/products.js";
 
 const router = Router();
 
@@ -8,22 +9,50 @@ const productsManager = new ProductsManager();
 const cartsManager = new CartsManager();
 
 router.get("/", async (req, res) => {
-  const products = await productsManager.getProducts();
-  res.render("home", { products, css: "products" });
-});
+  const { page = 1, sort = 1, limit = 3 } = req.query;
 
-router.get("/realtimeproducts", async (req, res) => {
-  res.render("realtimeproducts", { css: "realTimeProducts" });
+  const options = {
+    page,
+    limit: parseInt(limit),
+    lean: true,
+    sort: { price: sort },
+  };
+
+  const { docs, hasPrevPage, hasNextPage, prevPage, nextPage, ...rest } =
+    await productModel.paginate({}, options);
+
+  // const result = await productModel.paginate({}, { limit: 3, lean: true });
+  // console.log(result);
+  const products = docs;
+
+  res.render("home", {
+    products,
+    page: rest.page,
+    hasPrevPage,
+    hasNextPage,
+    prevPage,
+    nextPage,
+    css: "products",
+  });
+});
+router.get("/realTimeProducts", async (req, res) => {
+  res.render("realTimeProducts", { css: "realTimeProducts" });
 });
 
 router.get("/cart", async (req, res) => {
   const carts = await cartsManager.getCarts();
-  console.log(carts);
   res.render("cart", { carts, css: "cart" });
 });
 
+router.get("/cart/:cid", async (req, res) => {
+  const cid = req.params.cid;
+  const carts = await cartsManager.getCarts();
+  const cartSelected = carts.find((cart) => cart._id == cid);
+  res.render("oneCart", { cartSelected, css: "cart" });
+});
+
 router.get("/chat", async (req, res) => {
-  res.render("chat");
+  res.render("chat", { css: "chat" });
 });
 
 export default router;

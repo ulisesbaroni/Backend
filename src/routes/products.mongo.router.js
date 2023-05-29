@@ -1,5 +1,6 @@
 import { Router } from "express";
 import ProductsManager from "../dao/mongo/managers/productManager.js";
+import productModel from "../dao/mongo/models/products.js";
 
 const router = Router();
 
@@ -8,9 +9,29 @@ export default router;
 const productsManager = new ProductsManager();
 
 router.get("/", async (req, res) => {
-  const products = await productsManager.getProducts();
+  const { page = 1 } = req.query;
+  const {
+    docs,
+    totalPages,
+    hasPrevPage,
+    hasNextpage,
+    prevPage,
+    nextPage,
+    ...rest
+  } = await productModel.paginate({}, { page, limit: 3, lean: true });
+  const products = docs;
+  console.log(products);
   req.io.emit("updateProducts", products);
-  res.send({ status: "succes", payload: products });
+  res.send({
+    status: "succes",
+    payload: products,
+    totalPages: totalPages,
+    prevPage: prevPage,
+    nextPage: nextPage,
+    page: page,
+    hasPrevPage: hasPrevPage,
+    hasNextPage: hasNextpage,
+  });
 });
 
 router.post("/", async (req, res) => {
@@ -47,28 +68,26 @@ router.post("/", async (req, res) => {
   res.sendStatus(201);
 });
 
-router.get("/:cid", async (req, res) => {
-  const { cid } = req.params;
-  const products = await productsManager.getProductsBy({ _id: cid });
+router.get("/:pid", async (req, res) => {
+  const { pid } = req.params;
+  const products = await productsManager.getProductsById({ _id: pid });
   if (!products)
     res.status(404).send({ status: "error", error: "product not found" });
   res.send({ status: "succes", payload: products });
 });
 
-router.put("/:cid", async (req, res) => {
-  const { cid } = req.params;
-
+router.put("/:pid", async (req, res) => {
+  const { pid } = req.params;
   const updateProduct = req.body;
-
-  const result = await productsManager.updateproduct(cid, updateProduct);
+  const result = await productsManager.updateproduct(pid, updateProduct);
   const products = await productsManager.getProducts();
   req.io.emit("updateProducts", products);
 
   res.sendStatus(201);
 });
 
-router.delete("/:cid", async (req, res) => {
-  const { cid } = req.params;
+router.delete("/:pid", async (req, res) => {
+  const { pid } = req.params;
 
   await productsManager.deleteCompany(cid);
   const products = await productsManager.getProducts();
