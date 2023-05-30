@@ -26,6 +26,7 @@ chatBox.addEventListener("keyup", (evt) => {
   if (evt.key === "Enter") {
     if (chatBox.value.trim().length > 0) {
       socket.emit("message", { user, message: chatBox.value.trim() });
+      chatBox.value = ''
     }
   }
 });
@@ -34,6 +35,7 @@ const sendButton = document.getElementById("sendButton");
 sendButton.addEventListener("click", () => {
   if (chatBox.value.trim().length > 0) {
     socket.emit("message", { user, message: chatBox.value.trim() });
+    chatBox.value = ''
   }
 });
 

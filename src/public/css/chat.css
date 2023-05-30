@@ -18,7 +18,7 @@
     padding-top: 30px;
   }
   .messages {
-    color: white;
+    color: black;
     margin-left: 30px;
     padding-top: 30px;
   }
@@ -46,5 +46,6 @@
     height: 30px;
     border-radius: 40px;
     color: #634133;
+    font-weight: bolder;
     margin-left: 30px;
   }

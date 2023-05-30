@@ -35,7 +35,9 @@ router.get(`/:pId`, async (req, res) => {
 router.post(`/`, async (req, res) => {
   try {
     const newContent = req.body;
-    productsManager.addProduct(newContent);
+    await productsManager.addProduct(newContent);
+    const products = await productsManager.getProducts();
+    req.io.emit("updateProducts", products);
     res.send({ status: "succes", message: "product posted" });
   } catch (error) {
     res.status(404).send({ status: "error", error: "not found" });
