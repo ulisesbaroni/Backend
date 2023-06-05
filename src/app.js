@@ -7,12 +7,29 @@ import handlebars from "express-handlebars";
 import { Server } from "socket.io";
 import ProductsManager from "./dao/mongo/managers/productManager.js";
 import mongoose from "mongoose";
+import MongoStore from "connect-mongo";
 import messagesModel from "./dao/mongo/models/messages.js";
 import productModel from "./dao/mongo/models/products.js";
+import session from "express-session";
+import sessionRouter from "./routes/session.router.js";
 
 const app = express();
 
 const connection = mongoose.connect('mongodb+srv://coder:coder@cluster0.p9f6x9a.mongodb.net/ecommerce');
+
+app.use(
+  session({
+    store: new MongoStore({
+      mongoUrl:
+        "mongodb+srv://coder:coder@cluster0.p9f6x9a.mongodb.net/ecommerce",
+      ttl: 3600,
+    }),
+    secret: "almainsapp",
+    resave: false,
+    saveUninitialized: false,
+  })
+);
+
 const server = app.listen(8080, () => console.log("escuchando"));
 const io = new Server(server);
 
@@ -25,6 +42,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use("/api/products", ProductsRouter);
 app.use("/api/carts", CartsRouter);
+app.use("/api/sessions", sessionRouter);
 
 app.engine("handlebars", handlebars.engine());
 app.set("views", `${__dirname}/views`);

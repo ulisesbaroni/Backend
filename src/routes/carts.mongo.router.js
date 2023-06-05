@@ -32,7 +32,7 @@ router.post("/", async (req, res) => {
     return res.status(404).send({ status: "error", error: "cart not created" });
   }
 });
-router.post("/:cid/:pid", async (req, res) => {
+router.post("/:cid/:products", async (req, res) => {
   try {
     const { cid } = req.params;
     const { pid } = req.params;
