@@ -14,36 +14,56 @@
 <div id="controles">
   <form action="/" method="GET">
     <div id="labels">
-      <label for="limit">Cantidad de productos:</label>
-      <select name="limit" id="limit">
+
+      <label for="limit"></label>
+
+      <select
+        name="limit"
+        id="limit"
+        class="form-select"
+        aria-label="Default select example"
+      >
+        <option value="5">Cantidad de productos</option>
         <option value="1">1</option>
         <option value="3">3</option>
         <option value="5">5</option>
       </select>
 
-      <label for="sort">Ordenar por:</label>
-      <select name="sort" id="sort">
+      <label for="sort"></label>
+      <select
+        name="sort"
+        id="sort"
+        class="form-select"
+        aria-label="Default select example"
+      >
+        <option value="1">Ordenar por:</option>
         <option value="1">Menor precio</option>
         <option value="-1">Mayor precio</option>
       </select>
     </div>
-    <button type="submit">Aplicar cambios</button>
+    <button type="submit" class="btn btn-outline-secondary aplicar">Aplicar
+      cambios</button>
   </form>
 </div>
 
 <div id="contenedorPricipal">
   <div id="product-container">
     {{#each products}}
-      <div>
-        <div class="cardContainer">
-          <h2>{{title}}</h2>
-          <p class="category">{{category}}</p>
-          <div class="imgConteiner">
-            <img src="{{thumbnail}}" alt="{{title}}" />
+      <div class="card mb-3" style="max-width: 540px;">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img src="{{thumbnail}}" alt="{{title}}" class="img-fluid rounded-start" />
           </div>
-          <p class="description">{{description}}</p>
-          <p class="price">$ {{price}}</p>
-          <button id="{{_id}}" class="add-to-cart-button">Agrecar al carrito</button>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">{{title}}</h5>
+              <p class="category">{{category}}</p>
+              <p class="card-text card-text-description">{{description}}</p>
+              <p class="card-text"><small class="text-muted">$
+                  {{price}}</small></p>
+              <button id="{{_id}}" class="add-to-cart-button btn btn-outline-secondary">Agrecar al carrito</button>
+            </div>
+          </div>
         </div>
       </div>
     {{/each}}
@@ -63,6 +83,11 @@
 
 </div>
 
+<script
+  src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+  crossorigin="anonymous"
+></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="/js/productHandler.js"></script>
 <script src="/js/logout.js"></script>

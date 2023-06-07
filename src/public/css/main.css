@@ -39,13 +39,14 @@ background: linear-gradient(0deg, rgba(214,206,147,1) 0%, rgba(163,163,128,1) 35
     width: 100%;
     height: 100%;
     display: flex;
-    margin-left: 60px;
+    /* margin-left: 60px; */
     align-items: center;
     list-style: none;
     color: white;
   }
   .navBar ul li {
-    margin-right: 30px;
+    margin-right: 15px;
+    margin-left: 30px;
     cursor: pointer;
   }
   .navBar ul li a {

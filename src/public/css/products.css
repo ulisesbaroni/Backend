@@ -58,59 +58,60 @@ h1 {
   cursor: pointer;
 }
 
-#product-container {
-  width: 80vw;
-  height: auto;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  background-color: white;
+#controles{
+  margin-bottom: 2em;
 }
 
-.cardContainer {
-  flex-basis: 30%;
-  color: black;
-  text-align: center;
+#controles form {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
-  justify-content: space-between;
-  padding: 20px;
-  width: 200px;
-  height: 400px;
-  border-radius: 15px;
-  background-color: white;
-  margin-left: 15px;
-  cursor: pointer;
-  margin-bottom: 30px;
-  -webkit-box-shadow: 1px 3px 19px -3px #000000;
-  box-shadow: 1px 3px 19px -3px #000000;
 }
 
-.cardTitle{
-  font-size: 18px;
-  color: #634133;
+#labels {
+  display: flex;
+} 
+
+.form-select{
+  margin: 5px;
+  width: auto;
 }
 
-.price {
-  color: #634133;
-  font-weight: bolder;
+#controles button{
+  margin-top: 1em;
 }
-.imgConteiner {
-  width: 100px;
+
+#product-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    margin-left: 15%;
+    margin-right: 15%;
 }
-.imgConteiner img {
-  width: 100%;
-  object-fit: cover;
+
+.col-md-4{
+ margin-top: 4%;
+}
+
+.category{
+  margin-bottom: 0.5em;
+}
+
+.card-text-description {
+  font-size: 13px;
+
 }
 
 #pageHandler {
-  width: 80vw;
+  width: 100%;
   margin-top: 30px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
 #pageHandler p {
   margin: 20px;
   color: #634133;
@@ -127,56 +128,4 @@ h1 {
   font-weight: bold;
   background-color: white;
   color: black;
-}
-#controles {
-  margin-top: 30px;
-  margin-bottom: 50px;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-}
-#controles form {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-#controles select {
-  margin-right: 30px;
-  margin-left: 5px;
-}
-
-#controles button {
-  width: 200px;
-  height: 30px;
-  padding: 5px;
-  border-radius: 15px;
-  border: 2px solid #634133 !important;
-  margin-top: 30px;
-  background-color: white;
-  color: #634133;
-  cursor: pointer;
-}
-#controles select {
-  height: 30px;
-  padding: 5px;
-  border-radius: 15px;
-  border: 2px solid #634133 !important;
-  background-color: white;
-  color: #634133;
-}
-.cardContainer button {
-  margin-top: 10px;
-  height: 30px;
-  padding: 5px;
-  border-radius: 15px;
-  border: 2px solid #634133 !important;
-  background-color:white;
-  color: black;
-  cursor: pointer;
-}
-#labels {
-  color: #634133;
-  margin-top: 5px;
 }
