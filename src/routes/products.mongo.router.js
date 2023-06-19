@@ -89,7 +89,7 @@ router.put("/:pid", async (req, res) => {
 router.delete("/:pid", async (req, res) => {
   const { pid } = req.params;
 
-  await productsManager.deleteCompany(pid);
+  await productsManager.deleteProduct(pid);
   const products = await productsManager.getProducts();
   req.io.emit("updateProducts", products);
 

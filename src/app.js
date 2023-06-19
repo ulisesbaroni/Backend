@@ -1,8 +1,9 @@
 import express from "express";
 import ProductsRouter from "./routes/products.mongo.router.js";
 import CartsRouter from "./routes/carts.mongo.router.js";
-import __dirname from "./utils.js";
+import sessionRouter from "./routes/session.router.js";
 import viewsRouter from "./routes/views.router.js";
+import __dirname from "./utils.js";
 import handlebars from "express-handlebars";
 import { Server } from "socket.io";
 import ProductsManager from "./dao/mongo/managers/productManager.js";
@@ -11,11 +12,26 @@ import MongoStore from "connect-mongo";
 import messagesModel from "./dao/mongo/models/messages.js";
 import productModel from "./dao/mongo/models/products.js";
 import session from "express-session";
-import sessionRouter from "./routes/session.router.js";
+import passport from "passport";
+import initializePassport from "./config/passport.config.js";
 
 const app = express();
-
 const connection = mongoose.connect('mongodb+srv://coder:coder@cluster0.p9f6x9a.mongodb.net/ecommerce');
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static(`${__dirname}/public`));
+app.use((req, res, next) => {
+  req.io = io;
+  next();
+});
+
+app.engine("handlebars", handlebars.engine());
+app.set("views", `${__dirname}/views`);
+app.set("view engine", "handlebars");
+
+app.use(passport.initialize());
+initializePassport();
 
 app.use(
   session({
@@ -33,21 +49,9 @@ app.use(
 const server = app.listen(8080, () => console.log("escuchando"));
 const io = new Server(server);
 
-app.use((req, res, next) => {
-  req.io = io;
-  next();
-});
-
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 app.use("/api/products", ProductsRouter);
 app.use("/api/carts", CartsRouter);
 app.use("/api/sessions", sessionRouter);
-
-app.engine("handlebars", handlebars.engine());
-app.set("views", `${__dirname}/views`);
-app.set("view engine", "handlebars");
-app.use(express.static(`${__dirname}/public`));
 app.use("/", viewsRouter);
 
 io.on("connection", async (socket) => {

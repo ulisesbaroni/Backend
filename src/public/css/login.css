@@ -62,3 +62,13 @@
     color: #634133;
     margin-top: 20px;
   }
+
+  a {
+    color: rgb(0, 132, 255);
+    text-decoration: none;
+  }
+
+  p {
+    margin-top: 2em;
+    margin-bottom: 5px;
+  }
