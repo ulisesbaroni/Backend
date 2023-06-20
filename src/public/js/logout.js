@@ -6,21 +6,21 @@ logoutButton.addEventListener("click", function () {
   fetch("/api/sessions/logout", {
     method: "POST",
   })
-    .then((response) => {
-      if (response.ok) {
-        // Redirige a la página de inicio de sesión
-        Swal.fire({
-          toast: true,
-          position: "top-end",
-          showConfirmButton: false,
-          timer: 2000,
-          title: `Cerrando sesion...`,
-          icon: "success",
-        });
-
+  .then((response) => {
+    if (response.ok) {
+      Swal.fire({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        title: `Cerrando sesión...`,
+        icon: "success",
+      });
+  
+      setTimeout(() => {
         window.location.replace("/login");
-      }
-    })
+      }, 2000);
+    }
+  })
     .catch((error) => {
       console.error("Error al realizar la petición:", error);
     });

@@ -5,6 +5,7 @@ form.addEventListener("submit", async (event) => {
   const data = new FormData(form);
   const obj = {};
   data.forEach((value, key) => (obj[key] = value));
+
   const response = await fetch("/api/sessions/register", {
     method: "POST",
     body: JSON.stringify(obj),
@@ -12,17 +13,20 @@ form.addEventListener("submit", async (event) => {
       "content-type": "application/json",
     },
   });
-  const resposeData = await response.json();
-  
-  if (resposeData.status === "succes") {
+
+  const responseData = await response.json();
+  if (responseData.status === "success") {
     Swal.fire({
       toast: true,
       position: "top-end",
       showConfirmButton: false,
-      timer: 2000,
-      title: `Registro completo!`,
+      title: `Registro exitoso!`,
       icon: "success",
     });
-    window.location.replace("/login");
+
+    setTimeout(() => {
+      window.location.replace("/login");
+    }, 2000);
+
   }
 });

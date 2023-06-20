@@ -7,11 +7,10 @@ export const createHash = async (password) => {
     return bcrypt.hash(password, salts);
   };
   
-  export const validatePassword = (password, hashedPassword) =>
+export const validatePassword = (password, hashedPassword) =>
     bcrypt.compare(password, hashedPassword);
 
 const __filename = fileURLToPath(import.meta.url);
-
 const __dirname = dirname(__filename);
 
 export default __dirname;

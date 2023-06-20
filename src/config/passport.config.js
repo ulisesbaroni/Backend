@@ -48,7 +48,7 @@ const initializePassportStrategies = () => {
       { usernameField: "email" },
       async (email, password, done) => {
         // PASSPORT SÓLO DEBE DEVOLVER AL USUARIO FINAL, ÉL NO ES RESPONSABLE DE LA SESIÓN
-        if (email === "adminCoder@coder.com" && password === "adminCod3r123") {
+        if (email === "adminCoder@coder.com" && password === "admin123") {
           //Desde aquí ya puedo inicializar al admin.
           const user = {
             id: 0,
@@ -70,7 +70,6 @@ const initializePassportStrategies = () => {
           return done(null, false, { message: "Contraseña inválida" });
 
         // Si existe y puso su contraseña correcta, como estoy en passport, sólo devuelvo al usuario
-
         user = {
           id: user._id,
           name: `${user.first_name} ${user.last_name}`,

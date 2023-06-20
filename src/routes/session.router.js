@@ -43,7 +43,7 @@ router.post(
 );
 router.get("/loginFail", (req, res) => {
   if (req.session.messages >= 4)
-    return res.status(400).send({ message: "BLOQUEA LOS INTENTOS YA!!" });
+    return res.status(400).send({ message: "Demasiados intentos fallidos de inicio de sesión." });
   res.status(400).send({ status: "error", error: req.session.messages });
 });
 

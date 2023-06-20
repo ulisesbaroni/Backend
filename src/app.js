@@ -38,7 +38,7 @@ app.use(
     store: new MongoStore({
       mongoUrl:
         "mongodb+srv://coder:coder@cluster0.p9f6x9a.mongodb.net/ecommerce",
-      ttl: 3600,
+      ttl: 36000,
     }),
     secret: "almainsapp",
     resave: false,

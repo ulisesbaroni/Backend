@@ -5,32 +5,35 @@ form.addEventListener("submit", async (event) => {
   const data = new FormData(form);
   const obj = {};
   data.forEach((value, key) => (obj[key] = value));
-
+  
   const response = await fetch("/api/sessions/login", {
     method: "POST",
     body: JSON.stringify(obj),
     headers: {
-      "content-type": "application/json",
+      "Content-Type": "application/json",
     },
   });
-  const resposeData = await response.json();
-  if (resposeData.status === "succes") {
+  const responseData = await response.json();
+  if (responseData.status === "success") {
     Swal.fire({
       toast: true,
       position: "top-end",
       showConfirmButton: false,
-      timer: 2000,
-      title: `Logueado`,
+      title: `Iniciando sesión...`,
       icon: "success",
     });
-    window.location.replace("/");
+
+    setTimeout(() => {
+      window.location.replace("/");
+    }, 1500);
+
   } else {
     Swal.fire({
       toast: true,
       position: "top-end",
       showConfirmButton: false,
-      timer: 2500,
-      title: `Usuario o clave incorrectos`,
+      timer: 2000,
+      title: `usuario o clave incorrectos`,
       icon: "error",
     });
   }
